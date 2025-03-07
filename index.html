@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Visualizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #1e1e1e;
+            color: white;
+        }
+        canvas {
+            background-color: white;
+            display: block;
+            margin: 20px auto;
+            border: 2px solid black;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .push-btn { background-color: green; color: white; }
+        .pop-btn { background-color: red; color: white; }
+    </style>
+</head>
+<body>
+
+    <h1>Stack Visualizer</h1>
+    <canvas id="stackCanvas" width="300" height="400"></canvas>
+    <br>
+    <input type="number" id="stackInput" placeholder="Enter a number">
+    <button class="push-btn" onclick="pushElement()">Push</button>
+    <button class="pop-btn" onclick="popElement()">Pop</button>
+
+    <script>
+        // Get Canvas Context
+        const canvas = document.getElementById("stackCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Stack Data
+        let stack = [];
+        const boxHeight = 50; // Height of each stack element
+        const maxStackSize = 7; // Max elements to fit in canvas
+
+        // Function to Draw Stack
+        function drawStack(highlightIndex = -1, highlightColor = "blue") {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+            
+            for (let i = 0; i < stack.length; i++) {
+                let color = (i === highlightIndex) ? highlightColor : "blue"; // Highlight if index matches
+                
+                ctx.fillStyle = color;
+                ctx.fillRect(50, canvas.height - (i + 1) * boxHeight - 10, 200, boxHeight);
+                ctx.strokeStyle = "black";
+                ctx.strokeRect(50, canvas.height - (i + 1) * boxHeight - 10, 200, boxHeight);
+
+                ctx.fillStyle = "white";
+                ctx.font = "20px Arial";
+                ctx.fillText(stack[i], 140, canvas.height - (i * boxHeight) - 35);
+            }
+        }
+        
+        drawStack(); // Initial call to draw empty stack
+    </script>
+
+</body>
+</html>
