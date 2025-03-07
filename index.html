@@ -33,7 +33,7 @@
     <h1>Stack Visualizer</h1>
     <canvas id="stackCanvas" width="300" height="400"></canvas>
     <br>
-    <input type="number" id="stackInput" placeholder="Enter a number">
+    <input type="number" id="stack-input" placeholder="Enter a number">
     <button class="push-btn" onclick="pushElement()">Push</button>
     <button class="pop-btn" onclick="popElement()">Pop</button>
 
@@ -45,7 +45,7 @@
         // Stack Data
         let stack = [];
         const boxHeight = 50; // Height of each stack element
-        const maxStackSize = 7; // Max elements to fit in canvas
+        const maxStackSize = 10; // Max elements to fit in canvas
 
         // Function to Draw Stack
         function drawStack(highlightIndex = -1, highlightColor = "blue") {
@@ -64,8 +64,36 @@
                 ctx.fillText(stack[i], 140, canvas.height - (i * boxHeight) - 35);
             }
         }
+
+        function pushElement() {
+            let value = document.getElementById("stack-input").value;
+            if (value === "") return alert("Enter a value!");
+
+            if (stack.length < maxStackSize) {
+                stack.push(value);
+                drawStack(stack.length - 1, "green"); // Highlight new top element in green
+            } else {
+                alert("Stack Overflow! Can't push more.");
+            }
         
-        drawStack(); // Initial call to draw empty stack
+        }
+
+        function popElement() {
+            if (stack.length > 0) {
+                let poppedIndex = stack.length - 1; // Get top index
+
+                // Step 1: Highlight popped element in red
+                drawStack(poppedIndex, "red");
+
+                // Step 2: Remove after delay
+                setTimeout(() => {
+                    stack.pop();
+                    drawStack(); // Redraw stack after popping
+                }, 300); // 300ms delay
+            } else {
+                alert("Stack Underflow! No elements left.");
+            }}
+            drawStack();// Initial call to draw empty stack
     </script>
 
 </body>
