@@ -17,11 +17,13 @@
     <input type="number" id="stack-input" class="input-value" placeholder="Enter a number">
     <button class="push-btn" onclick="pushElement()">Push</button>
     <button class="pop-btn" onclick="popElement()">Pop</button>
+    <div id="log"></div>
 
     <script>
         // Get Canvas Context
         const canvas = document.getElementById("stackCanvas");
         const ctx = canvas.getContext("2d");
+        const logContent = document.getElementById("log");
 
         // Stack Data
         let stack = [];
@@ -42,13 +44,17 @@
 
                 ctx.fillStyle = "white";
                 ctx.font = "bold 20px Poppins";
-                ctx.fillText(stack[i], 140, canvas.height - (i * boxHeight) - 35);
+                ctx.textAlign = "center";      // Centers text horizontally
+                ctx.textBaseline = "middle";   // Centers text vertically
+                ctx.fillText(stack[i],canvas.width / 2, canvas.height - (i * boxHeight) - 35);
+                
             }
         }
 
         function pushElement() {
             let value = document.getElementById("stack-input").value;
             if (value === "") return alert("Enter a value!");
+            if (value >= 999999999999999) return alert("its too big")
 
             if (stack.length < maxStackSize) {
                 stack.push(value);
@@ -56,13 +62,14 @@
             } else {
                 alert("Stack Overflow! Can't push more.");
             }
-        
+            logContent.innerHTML += `${value} is added to the stack \n`; 
         }
 
         function popElement() {
             if (stack.length > 0) {
                 let poppedIndex = stack.length - 1; // Get top index
-
+                
+                logContent.innerHTML += `${stack[poppedIndex]} is removed from the stack \n`; 
                 // Step 1: Highlight popped element in red
                 drawStack(poppedIndex, "red");
 

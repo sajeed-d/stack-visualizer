@@ -3,6 +3,7 @@ body {
     text-align: center;
     background-color: #000000;
     color: white;
+    height: 2000px;
 }
 
 h1{
@@ -48,4 +49,11 @@ button {
     font-weight: bold;
     font-size: 15px;
     border-radius: 5px;
+}
+
+#log{
+    color: white;
+}
+#log-display{
+    color: white;
 }
