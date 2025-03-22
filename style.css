@@ -6,6 +6,10 @@ body {
     height: 2000px;
 }
 
+body::-webkit-scrollbar{
+    display: none;
+}
+
 h1{
     text-align: left;
     margin-left: 50px;
@@ -19,12 +23,7 @@ h1{
     grid-template-columns: 1fr 1fr;
 }
 
-.canvas-and-buttons{
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-}
-
-.right-buttons{
+.buttons{
     margin-top: 50px;
 }
 
@@ -78,6 +77,8 @@ h2{
     font-family: "Poppins";
     font-weight: bold;
     font-size: 20px;
+    overflow-y: scroll;
+    max-height: 800px;
 }
 
 .clear-btn{
